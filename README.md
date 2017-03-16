@@ -18,6 +18,7 @@ composer install iuliann/rapture-validation
 
 ## Quick Start
 
+
 ```php
 $validator = new Email();
 $validator->isValid('test@gmail.com'); // true
