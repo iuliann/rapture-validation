@@ -1,6 +1,7 @@
 <?php
 
 namespace Rapture\Validator\Definition;
+use Rapture\Validator\Group;
 
 /**
  * Base validator abstract class
@@ -15,11 +16,12 @@ abstract class ValidatorAbstract
 
     protected $options = [];
 
+    /** @var Group mixed */
     protected $previous;
 
     /**
-     * @param array $options Validator options
-     * @param string $message Message
+     * @param array  $options  Validator options
+     * @param string $message  Message
      * @param string $previous Previous validator - use this for bubbling validators - used with Group
      */
     public function __construct($options = [], $message = null, $previous = null)
@@ -69,5 +71,15 @@ abstract class ValidatorAbstract
         krsort($replacements);
 
         return str_replace(array_keys($replacements), $replacements, $this->message);
+    }
+
+    /**
+     * @param string $name Option name
+     *
+     * @return mixed
+     */
+    public function getOption($name)
+    {
+        return $this->options[$name] ?? null;
     }
 }

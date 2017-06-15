@@ -48,13 +48,44 @@ class Group
     protected $data = [];
 
     /**
-     * @param array $rules Group rules
-     * @param int   $mode
+     * Extra parameters to use with validation
+     *
+     * @var array
      */
-    public function __construct(array $rules = [], $mode = self::ERROR_MODE_ALL)
+    protected $params = [];
+
+    /**
+     * @param array $rules  Group rules
+     * @param int   $mode   Error mode
+     * @param array $params Extra params
+     */
+    public function __construct(array $rules = [], $mode = self::ERROR_MODE_ALL, $params = [])
     {
-        $this->rules = $rules;
-        $this->mode  = $mode;
+        $this->rules  = $rules;
+        $this->mode   = $mode;
+        $this->params = $params;
+    }
+
+    /**
+     * @param array $params Key value pair
+     *
+     * @return $this
+     */
+    public function setParams(array $params = [])
+    {
+        $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name Param name
+     *
+     * @return mixed
+     */
+    public function getParam($name)
+    {
+        return $this->params[$name] ?? null;
     }
 
     /**
@@ -179,7 +210,7 @@ class Group
                 $ruleName = get_class($rule);
             }
             else {
-                list($ruleName, $ruleOptions, $ruleMessage) = $rule + [null, [], null];
+                list($ruleName, $ruleOptions, $ruleMessage) = (array)$rule + [null, [], null];
                 $ruleCallback = $ruleName;
 
                 if (is_string($ruleCallback)) {
@@ -292,6 +323,9 @@ class Group
         return $this->errors;
     }
 
+    /**
+     * @return array
+     */
     public function getErrorsIndexed()
     {
         $errors = [];

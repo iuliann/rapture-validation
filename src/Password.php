@@ -18,7 +18,7 @@ class Password extends ValidatorAbstract
     const DIGIT     = 4;
     const SPECIAL   = 8;
 
-    protected $message = 'Pasword must be at least :length characters in length with no spaces and must contain at least one of the following: uppercase letter, lowercase letter, one digit and one special character!';
+    protected $message = 'Password must be at least :length characters in length with no spaces and must contain at least one of the following: A-Z, a-z, 0-9 and a special character!';
 
     protected $options = [
         'length'    => 6,
@@ -56,7 +56,7 @@ class Password extends ValidatorAbstract
             return false;
         }
 
-        if (($this->options['format'] & self::DIGIT) && (!preg_match('/[^0-9a-zA-Z]+/', $value))) {
+        if (($this->options['format'] & self::SPECIAL) && (!preg_match('/[^0-9a-zA-Z]+/', $value))) {
             return false;
         }
 

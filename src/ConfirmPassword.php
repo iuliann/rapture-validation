@@ -5,15 +5,15 @@ namespace Rapture\Validator;
 use Rapture\Validator\Definition\ValidatorAbstract;
 
 /**
- * Required validator
+ * Password validator
  *
  * @package Rapture\Validator
  * @author Iulian N. <rapture@iuliann.ro>
  * @license LICENSE MIT
  */
-class Required extends ValidatorAbstract
+class ConfirmPassword extends ValidatorAbstract
 {
-    protected $message = 'Required field.';
+    protected $message = 'Passwords do not match';
 
     /**
      * isValid
@@ -26,8 +26,6 @@ class Required extends ValidatorAbstract
     {
         $this->options['value'] = $value;
 
-        return is_array($value)
-            ? count($value) > 0
-            : strlen((string)$value) > 0;
+        return $value == $this->previous->getValueFor('password');
     }
 }

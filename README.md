@@ -1,4 +1,4 @@
-# Rapture Validation PHP
+# Rapture PHP Validation
 
 [![PhpVersion](https://img.shields.io/badge/php-5.4.0-orange.svg?style=flat-square)](#)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](#)
@@ -13,7 +13,7 @@ Simple validation for PHP.
 ## Install
 
 ```
-composer install iuliann/rapture-validation
+composer require iuliann/rapture-validation
 ```
 
 ## Quick Start
@@ -126,4 +126,4 @@ cd ./test && phpunit
 
 ### License
 
-Rapture-Validator is licensed under the MIT License - see the `LICENSE` file for details.
+Rapture PHP Validation is licensed under the MIT License - see the `LICENSE` file for details.

@@ -32,6 +32,13 @@ class EmailDomain extends ValidatorAbstract
 
         $domain = substr($value, strpos($value, '@') + 1);
 
+        // check if domain exists
+        $dns = checkdnsrr(idn_to_ascii($domain), 'A');
+        if ($dns === false) {
+            return false;
+        }
+
+        // check if domain is not temporary
         if ($domain) {
             if (in_array($domain, $this->getBlackList())) {
                 return false;
@@ -49,11 +56,17 @@ class EmailDomain extends ValidatorAbstract
         return false;
     }
 
+    /**
+     * @return array
+     */
     protected function getBlackList():array
     {
         return json_decode(file_get_contents(__DIR__ . '/data/email_disposable.json'), true);
     }
 
+    /**
+     * @return array
+     */
     protected function getWhitelist():array
     {
         return (array)($this->options['whitelist'] ?? []);

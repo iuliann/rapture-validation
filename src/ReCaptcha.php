@@ -50,8 +50,11 @@ class ReCaptcha extends ValidatorAbstract
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getSecret()
     {
-        return $this->options['secret'] ?: (defined('RECAPTCHA_SECRET') ? RECAPTCHA_SECRET : null);
+        return $this->options['secret'] ?: getenv('RECAPTCHA_SECRET_KEY');
     }
 }
