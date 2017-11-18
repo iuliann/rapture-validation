@@ -13,7 +13,7 @@ Simple validation for PHP.
 ## Install
 
 ```
-composer require iuliann/rapture-validation
+composer require mrjulio/rapture-validation
 ```
 
 ## Quick Start
